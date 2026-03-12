@@ -257,6 +257,43 @@ function TradeDetailPage({ trade, onBack, wallet, onConnect }) {
           <div style={{ fontFamily: "monospace", fontSize: 13, color: "#2E75B6", wordBreak: "break-all", background: "#F8FAFC", padding: 10, borderRadius: 6, marginBottom: 10 }}>{trade.escrowAddress}</div>
           <div style={{ fontSize: 12, color: "#8895A7" }}>{trade.escrowAddress === "Pending deployment" ? "Awaiting escrow deployment" : `Deployed on Arbitrum \u2022 Expires ${trade.expiresAt}`}</div>
         </div>
+        <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
+          <h3 style={{ margin: "0 0 14px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Cargo Details</h3>
+          {[
+            ["Commodity", trade.commodity],
+            ["Volume", trade.volume],
+            ["Trade Terms", trade.tradeTerms || "\u2014"],
+            ["Expiry Date", trade.expiresAt],
+          ].map(([l, v]) => (
+            <div key={l} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #f5f5f5" }}>
+              <span style={{ fontSize: 13, color: "#8895A7" }}>{l}</span>
+              <span style={{ fontSize: 13, color: "#1B2A4A", fontWeight: 600 }}>{v}</span>
+            </div>
+          ))}
+        </div>
+        <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
+          <h3 style={{ margin: "0 0 14px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Financial Terms</h3>
+          {[
+            ["Total Value", fmtFull(trade.totalAmount) + " USDC"],
+            ["Buyer Margin", `${((trade.buyerMargin/trade.totalAmount)*100).toFixed(0)}% (${fmtFull(trade.buyerMargin)})`],
+            ["Pool Capital", `${((trade.poolCapital/trade.totalAmount)*100).toFixed(0)}% (${fmtFull(trade.poolCapital)})`],
+            ["Tenor", `${trade.tenor || "\u2014"} days`],
+            ["Pool Yield Rate", trade.yieldRate ? `${trade.yieldRate}% per cycle` : "\u2014"],
+            ["Platform Fee", trade.platformFee ? `${trade.platformFee}%` : "\u2014"],
+            ["Buyer All-In Cost", trade.yieldRate && trade.platformFee ? `~${((trade.yieldRate * (100 - ((trade.buyerMargin/trade.totalAmount)*100)) / 100) + trade.platformFee).toFixed(2)}%` : "\u2014"],
+          ].map(([l, v]) => (
+            <div key={l} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #f5f5f5" }}>
+              <span style={{ fontSize: 13, color: "#8895A7" }}>{l}</span>
+              <span style={{ fontSize: 13, color: "#1B2A4A", fontWeight: 600 }}>{v}</span>
+            </div>
+          ))}
+          {trade.notes && (
+            <div style={{ marginTop: 12, padding: 12, background: "#F8FAFC", borderRadius: 8 }}>
+              <div style={{ fontSize: 11, color: "#8895A7", fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 4 }}>Notes</div>
+              <div style={{ fontSize: 13, color: "#1B2A4A", lineHeight: 1.5 }}>{trade.notes}</div>
+            </div>
+          )}
+        </div>
       </div>
       <div style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", gap: 16 }}>
         <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
@@ -437,3 +474,4 @@ export default function App() {
     <div style={{ flex: 1, padding: 28, overflowY: "auto", maxHeight: "100vh" }}>{renderPage()}</div>
   </div>);
 }
+
