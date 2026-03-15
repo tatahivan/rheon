@@ -12,14 +12,16 @@ const CHAINS = {
 const ARB_SEPOLIA_ID = "0x66eee";
 const shortAddr = (a) => a ? `${a.slice(0, 6)}...${a.slice(-4)}` : "";
 const INITIAL_TRADES = [
-  { id: "TRD-2026-0001", state: "Released", buyer: "Zenith Petroleum Ltd", buyerWallet: "0x7a3B...f9c2", exporter: "Vitol SA", exporterWallet: "0x4eD8...a1b3", commodity: "ULSD 10ppm", volume: "30,000 MT", totalAmount: 10000000, buyerMargin: 2500000, poolCapital: 7500000, marginPct: 25, escrowAddress: "0x1234...abcd", createdAt: "2026-02-18", fundedAt: "2026-02-18", shippedAt: "2026-02-22", inspectedAt: "2026-03-01", releasedAt: "2026-03-01", expiresAt: "2026-03-20", repaymentStatus: "Completed", repaymentReceived: 10150000, inspector: "SGS", tradeTerms: "CIF Lagos", tenor: 30, yieldRate: 1.5, platformFee: 1.25, notes: "" },
-  { id: "TRD-2026-0002", state: "Funded", buyer: "Oando Energy", buyerWallet: "0x9fA1...d4e7", exporter: "Trafigura Pte", exporterWallet: "0x3cB2...e8f1", commodity: "PMS (Gasoline)", volume: "25,000 MT", totalAmount: 8500000, buyerMargin: 2125000, poolCapital: 6375000, marginPct: 25, escrowAddress: "0x5678...ef01", createdAt: "2026-03-02", fundedAt: "2026-03-02", shippedAt: null, inspectedAt: null, releasedAt: null, expiresAt: "2026-03-25", repaymentStatus: "Pending", repaymentReceived: 0, inspector: "Bureau Veritas", tradeTerms: "CIF Apapa", tenor: 25, yieldRate: 1.75, platformFee: 1.25, notes: "" },
-  { id: "TRD-2026-0003", state: "Created", buyer: "MRS Oil & Gas", buyerWallet: "0x2dE3...b5a9", exporter: "Mercuria Energy", exporterWallet: "0x8aF4...c2d6", commodity: "AGO (Diesel)", volume: "20,000 MT", totalAmount: 7200000, buyerMargin: 1800000, poolCapital: 5400000, marginPct: 25, escrowAddress: "0x9abc...2345", createdAt: "2026-03-05", fundedAt: null, shippedAt: null, inspectedAt: null, releasedAt: null, expiresAt: "2026-03-30", repaymentStatus: "N/A", repaymentReceived: 0, inspector: "Intertek", tradeTerms: "FOB Rotterdam", tenor: 30, yieldRate: 2.0, platformFee: 1.0, notes: "" },
+  { id: "TRD-2026-0001", settlementType: "escrow", state: "Released", buyer: "Zenith Petroleum Ltd", buyerWallet: "0x7a3B...f9c2", exporter: "Vitol SA", exporterWallet: "0x4eD8...a1b3", commodity: "ULSD 10ppm", volume: "30,000 MT", totalAmount: 10000000, buyerMargin: 2500000, poolCapital: 7500000, marginPct: 25, escrowAddress: "0x1234...abcd", createdAt: "2026-02-18", fundedAt: "2026-02-18", shippedAt: "2026-02-22", inspectedAt: "2026-03-01", releasedAt: "2026-03-01", expiresAt: "2026-03-20", repaymentStatus: "Completed", repaymentReceived: 10150000, inspector: "SGS", tradeTerms: "CIF Lagos", tenor: 30, yieldRate: 1.5, platformFee: 1.25, notes: "", issuingBank: "", lcRef: "", bankFee: 0, collateralPct: 0 },
+  { id: "TRD-2026-0002", settlementType: "escrow", state: "Funded", buyer: "Oando Energy", buyerWallet: "0x9fA1...d4e7", exporter: "Trafigura Pte", exporterWallet: "0x3cB2...e8f1", commodity: "PMS (Gasoline)", volume: "25,000 MT", totalAmount: 8500000, buyerMargin: 2125000, poolCapital: 6375000, marginPct: 25, escrowAddress: "0x5678...ef01", createdAt: "2026-03-02", fundedAt: "2026-03-02", shippedAt: null, inspectedAt: null, releasedAt: null, expiresAt: "2026-03-25", repaymentStatus: "Pending", repaymentReceived: 0, inspector: "Bureau Veritas", tradeTerms: "CIF Apapa", tenor: 25, yieldRate: 1.75, platformFee: 1.25, notes: "", issuingBank: "", lcRef: "", bankFee: 0, collateralPct: 0 },
+  { id: "TRD-2026-0003", settlementType: "lc", state: "Funded", buyer: "Conoil Plc", buyerWallet: "", exporter: "Glencore AG", exporterWallet: "", commodity: "AGO (Diesel)", volume: "20,000 MT", totalAmount: 7200000, buyerMargin: 1440000, poolCapital: 5760000, marginPct: 20, escrowAddress: "", createdAt: "2026-03-05", fundedAt: "2026-03-06", shippedAt: null, inspectedAt: null, releasedAt: null, expiresAt: "2026-04-05", repaymentStatus: "Pending", repaymentReceived: 0, inspector: "SGS", tradeTerms: "CIF Lagos", tenor: 30, yieldRate: 1.0, platformFee: 1.0, notes: "First LC collateral trade. Bank relationship via GTBank.", issuingBank: "Guaranty Trust Bank", lcRef: "GTLC-2026-04412", bankFee: 2.5, collateralPct: 80, confirmingBank: "Standard Chartered" },
+  { id: "TRD-2026-0004", settlementType: "escrow", state: "Created", buyer: "MRS Oil & Gas", buyerWallet: "0x2dE3...b5a9", exporter: "Mercuria Energy", exporterWallet: "0x8aF4...c2d6", commodity: "AGO (Diesel)", volume: "20,000 MT", totalAmount: 7200000, buyerMargin: 1800000, poolCapital: 5400000, marginPct: 25, escrowAddress: "0x9abc...2345", createdAt: "2026-03-05", fundedAt: null, shippedAt: null, inspectedAt: null, releasedAt: null, expiresAt: "2026-03-30", repaymentStatus: "N/A", repaymentReceived: 0, inspector: "Intertek", tradeTerms: "FOB Rotterdam", tenor: 30, yieldRate: 2.0, platformFee: 1.0, notes: "", issuingBank: "", lcRef: "", bankFee: 0, collateralPct: 0 },
 ];
-const POOL_STATS = { totalCapital: 15000000, deployed: 13875000, available: 1125000, totalTrades: 47, activeTrades: 2, avgCycleTime: 14.2, ytdReturn: 8.7, annualisedReturn: 26.1 };
+const POOL_STATS = { totalCapital: 15000000, deployed: 13875000, inEscrow: 8125000, asCollateral: 5750000, available: 1125000, totalTrades: 47, activeTrades: 3, avgCycleTime: 14.2, ytdReturn: 8.7, annualisedReturn: 26.1 };
 const fmt = (n) => { if (n >= 1e6) return `$${(n/1e6).toFixed(2)}M`; if (n >= 1e3) return `$${(n/1e3).toFixed(0)}K`; return `$${n}`; };
 const fmtFull = (n) => `$${n.toLocaleString("en-US")}`;
-const stateColor = { Created: { bg: "#FFF3E0", text: "#E65100", border: "#FFB74D" }, Funded: { bg: "#E3F2FD", text: "#1565C0", border: "#64B5F6" }, Released: { bg: "#E8F5E9", text: "#2E7D32", border: "#81C784" }, Expired: { bg: "#FFEBEE", text: "#C62828", border: "#E57373" }, Cancelled: { bg: "#F5F5F5", text: "#616161", border: "#BDBDBD" } };
+const stateColor = { Created: { bg: "#FFF3E0", text: "#E65100", border: "#FFB74D" }, Funded: { bg: "#E3F2FD", text: "#1565C0", border: "#64B5F6" }, Released: { bg: "#E8F5E9", text: "#2E7D32", border: "#81C784" }, Expired: { bg: "#FFEBEE", text: "#C62828", border: "#E57373" }, Cancelled: { bg: "#F5F5F5", text: "#616161", border: "#BDBDBD" }, "LC Issued": { bg: "#E3F2FD", text: "#1565C0", border: "#64B5F6" }, "Collateral Posted": { bg: "#FFF3E0", text: "#E65100", border: "#FFB74D" }, "Collateral Returned": { bg: "#E8F5E9", text: "#2E7D32", border: "#81C784" } };
+const settleColor = { escrow: { bg: "#EDE7F6", text: "#4527A0", border: "#B39DDB" }, lc: { bg: "#E0F2F1", text: "#00695C", border: "#80CBC4" } };
 const todayStr = () => new Date().toISOString().split("T")[0];
 const futureStr = (d) => { const dt = new Date(); dt.setDate(dt.getDate() + d); return dt.toISOString().split("T")[0]; };
 
@@ -76,22 +78,30 @@ function Select({ value, onChange, options }) {
 
 function DashboardPage() {
   return (<div>
-    <div style={{ marginBottom: 24 }}><h2 style={{ margin: 0, fontSize: 22, color: "#1B2A4A", fontWeight: 700 }}>Capital Pool Overview</h2><p style={{ margin: "4px 0 0", fontSize: 13, color: "#8895A7" }}>Mauritius GBC \u2014 Real-time pool status</p></div>
+    <div style={{ marginBottom: 24 }}><h2 style={{ margin: 0, fontSize: 22, color: "#1B2A4A", fontWeight: 700 }}>Vault Overview</h2><p style={{ margin: "4px 0 0", fontSize: 13, color: "#8895A7" }}>Real-time vault and deployment status</p></div>
     <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 28 }}>
-      <StatCard label="Total Pool Capital" value={fmt(POOL_STATS.totalCapital)} sub="USDC held by SPV" />
+      <StatCard label="Total Vault Capital" value={fmt(POOL_STATS.totalCapital)} sub="USDC in vault" />
       <StatCard label="Deployed" value={fmt(POOL_STATS.deployed)} sub={`${((POOL_STATS.deployed/POOL_STATS.totalCapital)*100).toFixed(0)}% utilisation`} accent="#7B1FA2" />
       <StatCard label="Available" value={fmt(POOL_STATS.available)} sub="Ready for deployment" accent="#2E7D32" />
       <StatCard label="Active Trades" value={POOL_STATS.activeTrades} sub={`of ${POOL_STATS.totalTrades} total`} />
     </div>
     <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 28 }}>
-      <StatCard label="Avg Cycle Time" value={`${POOL_STATS.avgCycleTime} days`} sub="Funding to repayment" />
+      <StatCard label="In Escrow" value={fmt(POOL_STATS.inEscrow)} sub="Direct settlement" accent="#7B1FA2" />
+      <StatCard label="As LC Collateral" value={fmt(POOL_STATS.asCollateral)} sub="Margin financing" accent="#00695C" />
       <StatCard label="YTD Return" value={`${POOL_STATS.ytdReturn}%`} sub="Net of fees" accent="#2E7D32" />
       <StatCard label="Annualised Return" value={`${POOL_STATS.annualisedReturn}%`} sub="Projected at current velocity" accent="#2E7D32" />
     </div>
     <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
-      <h3 style={{ margin: "0 0 16px", fontSize: 15, color: "#1B2A4A" }}>Pool Deployment</h3>
-      <div style={{ height: 24, borderRadius: 12, background: "#F5F5F5", overflow: "hidden", position: "relative" }}><div style={{ height: "100%", borderRadius: 12, background: "linear-gradient(90deg, #7B1FA2, #1565C0)", width: `${(POOL_STATS.deployed/POOL_STATS.totalCapital)*100}%` }} /></div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, fontSize: 12, color: "#8895A7" }}><span>{fmt(POOL_STATS.deployed)} deployed</span><span>{fmt(POOL_STATS.available)} available</span></div>
+      <h3 style={{ margin: "0 0 16px", fontSize: 15, color: "#1B2A4A" }}>Capital Deployment</h3>
+      <div style={{ height: 24, borderRadius: 12, background: "#F5F5F5", overflow: "hidden", display: "flex" }}>
+        <div style={{ height: "100%", background: "linear-gradient(90deg, #7B1FA2, #5E35B1)", width: `${(POOL_STATS.inEscrow/POOL_STATS.totalCapital)*100}%`, transition: "width 0.3s" }} />
+        <div style={{ height: "100%", background: "linear-gradient(90deg, #00897B, #00695C)", width: `${(POOL_STATS.asCollateral/POOL_STATS.totalCapital)*100}%`, transition: "width 0.3s" }} />
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, fontSize: 12, color: "#8895A7" }}>
+        <span><span style={{ color: "#7B1FA2", fontWeight: 600 }}>{fmt(POOL_STATS.inEscrow)}</span> escrow</span>
+        <span><span style={{ color: "#00695C", fontWeight: 600 }}>{fmt(POOL_STATS.asCollateral)}</span> LC collateral</span>
+        <span>{fmt(POOL_STATS.available)} idle</span>
+      </div>
     </div>
   </div>);
 }
@@ -99,32 +109,39 @@ function DashboardPage() {
 function TradesPage({ trades, onSelect, onNewTrade }) {
   return (<div>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-      <div><h2 style={{ margin: 0, fontSize: 22, color: "#1B2A4A", fontWeight: 700 }}>Trades</h2><p style={{ margin: "4px 0 0", fontSize: 13, color: "#8895A7" }}>All trade escrows</p></div>
+      <div><h2 style={{ margin: 0, fontSize: 22, color: "#1B2A4A", fontWeight: 700 }}>Trades</h2><p style={{ margin: "4px 0 0", fontSize: 13, color: "#8895A7" }}>All trade escrows and LC collateral</p></div>
       <button onClick={onNewTrade} style={{ padding: "10px 20px", background: "#1B2A4A", color: "#fff", border: "none", borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>+ New Trade</button>
     </div>
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      {trades.map(trade => (
+      {trades.map(trade => {
+        const sc = settleColor[trade.settlementType] || settleColor.escrow;
+        return (
         <div key={trade.id} onClick={() => onSelect(trade)} style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20, cursor: "pointer", transition: "border-color 0.2s" }}
           onMouseEnter={e => e.currentTarget.style.borderColor = "#2E75B6"} onMouseLeave={e => e.currentTarget.style.borderColor = "#E8ECF0"}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
-            <div><div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}><span style={{ fontSize: 15, fontWeight: 700, color: "#1B2A4A" }}>{trade.id}</span><Badge state={trade.state} /></div><div style={{ fontSize: 13, color: "#8895A7" }}>{trade.commodity} \u2022 {trade.volume}</div></div>
+            <div><div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+              <span style={{ fontSize: 15, fontWeight: 700, color: "#1B2A4A" }}>{trade.id}</span>
+              <Badge state={trade.state} />
+              <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: 0.5, background: sc.bg, color: sc.text, border: `1px solid ${sc.border}` }}>{trade.settlementType === "lc" ? "LC COLLATERAL" : "ESCROW"}</span>
+            </div><div style={{ fontSize: 13, color: "#8895A7" }}>{trade.commodity} \u2022 {trade.volume}</div></div>
             <div style={{ textAlign: "right" }}><div style={{ fontSize: 20, fontWeight: 700, color: "#1B2A4A" }}>{fmtFull(trade.totalAmount)}</div><div style={{ fontSize: 11, color: "#8895A7" }}>USDC</div></div>
           </div>
           <div style={{ display: "flex", gap: 20, fontSize: 12, color: "#8895A7", marginBottom: 14, flexWrap: "wrap" }}>
             <span><strong style={{ color: "#3D5A80" }}>Buyer:</strong> {trade.buyer}</span>
             <span><strong style={{ color: "#3D5A80" }}>Exporter:</strong> {trade.exporter}</span>
-            <span><strong style={{ color: "#3D5A80" }}>Inspector:</strong> {trade.inspector}</span>
+            {trade.settlementType === "lc" ? <span><strong style={{ color: "#3D5A80" }}>Bank:</strong> {trade.issuingBank}</span> : <span><strong style={{ color: "#3D5A80" }}>Inspector:</strong> {trade.inspector}</span>}
           </div>
           <FundingBar buyerMargin={trade.buyerMargin} poolCapital={trade.poolCapital} buyerDeposited={trade.state !== "Created" ? trade.buyerMargin : trade.buyerMargin * 0.4} poolDeposited={trade.state !== "Created" ? trade.poolCapital : 0} />
         </div>
-      ))}
+      );})}
     </div>
   </div>);
 }
 
 function NewTradePage({ onBack, onSubmit, nextId }) {
-  const [form, setForm] = useState({ buyer: "", buyerWallet: "", exporter: "", exporterWallet: "", commodity: "ULSD 10ppm", customCommodity: "", volume: "", volumeUnit: "MT", totalAmount: "", marginPct: "25", inspector: "SGS", tradeTerms: "CIF", port: "", tenor: "30", yieldRate: "1.75", platformFee: "1.25", notes: "" });
+  const [form, setForm] = useState({ settlementType: "escrow", buyer: "", buyerWallet: "", exporter: "", exporterWallet: "", commodity: "ULSD 10ppm", customCommodity: "", volume: "", volumeUnit: "MT", totalAmount: "", marginPct: "25", inspector: "SGS", tradeTerms: "CIF", port: "", tenor: "30", yieldRate: "1.75", platformFee: "1.25", notes: "", issuingBank: "", confirmingBank: "", lcRef: "", bankFee: "2.5", collateralPct: "80" });
   const set = (k) => (v) => setForm(f => ({ ...f, [k]: v }));
+  const isLC = form.settlementType === "lc";
   const totalNum = parseFloat(form.totalAmount) || 0;
   const marginPctNum = parseFloat(form.marginPct) || 0;
   const buyerMargin = Math.round(totalNum * (marginPctNum / 100));
@@ -132,33 +149,67 @@ function NewTradePage({ onBack, onSubmit, nextId }) {
   const tenorNum = parseInt(form.tenor) || 30;
   const yieldNum = parseFloat(form.yieldRate) || 0;
   const feeNum = parseFloat(form.platformFee) || 0;
+  const bankFeeNum = parseFloat(form.bankFee) || 0;
+  const collateralPctNum = parseFloat(form.collateralPct) || 0;
   const poolReturn = Math.round(poolCapital * (yieldNum / 100));
   const platformFeeAmt = Math.round(totalNum * (feeNum / 100));
-  const buyerAllIn = marginPctNum > 0 ? ((yieldNum * (100 - marginPctNum) / 100) + feeNum).toFixed(2) : "0";
+  const buyerAllIn = isLC
+    ? (bankFeeNum + feeNum + (yieldNum * collateralPctNum / 100)).toFixed(2)
+    : marginPctNum > 0 ? ((yieldNum * (100 - marginPctNum) / 100) + feeNum).toFixed(2) : "0";
   const commodities = [{ value: "ULSD 10ppm", label: "ULSD 10ppm (Diesel)" },{ value: "AGO", label: "AGO (Automotive Gas Oil)" },{ value: "PMS", label: "PMS (Gasoline/Petrol)" },{ value: "JET A-1", label: "JET A-1 (Aviation Fuel)" },{ value: "DPK", label: "DPK (Dual Purpose Kerosene)" },{ value: "LPG", label: "LPG (Liquefied Petroleum Gas)" },{ value: "Crude Oil", label: "Crude Oil" },{ value: "Palm Oil", label: "Palm Oil (Edible)" },{ value: "Soybean Oil", label: "Soybean Oil" },{ value: "Urea", label: "Urea (Fertiliser)" },{ value: "DAP", label: "DAP (Fertiliser)" },{ value: "Rice", label: "Rice" },{ value: "Wheat", label: "Wheat" },{ value: "Sugar", label: "Sugar (ICUMSA 45)" },{ value: "Cement", label: "Cement" },{ value: "Other", label: "Other (specify)" }];
   const inspectors = [{ value: "SGS", label: "SGS" },{ value: "Bureau Veritas", label: "Bureau Veritas" },{ value: "Intertek", label: "Intertek" },{ value: "Cotecna", label: "Cotecna" },{ value: "AmSpec", label: "AmSpec" }];
   const terms = [{ value: "CIF", label: "CIF" },{ value: "CFR", label: "CFR" },{ value: "FOB", label: "FOB" },{ value: "DAP", label: "DAP" },{ value: "DDP", label: "DDP" }];
-  const isValid = form.buyer && form.exporter && form.buyerWallet && form.exporterWallet && totalNum > 0 && form.volume && form.port;
+  const isValid = form.buyer && form.exporter && totalNum > 0 && form.volume && form.port && (isLC ? form.issuingBank : (form.buyerWallet && form.exporterWallet));
   const handleSubmit = () => {
     if (!isValid) return;
     const commodity = form.commodity === "Other" ? form.customCommodity : form.commodity;
-    onSubmit({ id: nextId, state: "Created", buyer: form.buyer, buyerWallet: form.buyerWallet, exporter: form.exporter, exporterWallet: form.exporterWallet, commodity, volume: `${Number(form.volume).toLocaleString()} ${form.volumeUnit}`, totalAmount: totalNum, buyerMargin, poolCapital, marginPct: marginPctNum, escrowAddress: "Pending deployment", createdAt: todayStr(), fundedAt: null, shippedAt: null, inspectedAt: null, releasedAt: null, expiresAt: futureStr(tenorNum), repaymentStatus: "N/A", repaymentReceived: 0, inspector: form.inspector, tradeTerms: `${form.tradeTerms} ${form.port}`, tenor: tenorNum, yieldRate: yieldNum, platformFee: feeNum, notes: form.notes });
+    onSubmit({ id: nextId, settlementType: form.settlementType, state: "Created", buyer: form.buyer, buyerWallet: form.buyerWallet, exporter: form.exporter, exporterWallet: form.exporterWallet, commodity, volume: `${Number(form.volume).toLocaleString()} ${form.volumeUnit}`, totalAmount: totalNum, buyerMargin, poolCapital, marginPct: marginPctNum, escrowAddress: isLC ? "" : "Pending deployment", createdAt: todayStr(), fundedAt: null, shippedAt: null, inspectedAt: null, releasedAt: null, expiresAt: futureStr(tenorNum), repaymentStatus: "N/A", repaymentReceived: 0, inspector: form.inspector, tradeTerms: `${form.tradeTerms} ${form.port}`, tenor: tenorNum, yieldRate: yieldNum, platformFee: feeNum, notes: form.notes, issuingBank: form.issuingBank, confirmingBank: form.confirmingBank, lcRef: form.lcRef, bankFee: bankFeeNum, collateralPct: collateralPctNum });
   };
 
   return (<div>
     <button onClick={onBack} style={{ background: "none", border: "none", color: "#2E75B6", fontSize: 13, cursor: "pointer", padding: 0, marginBottom: 16, fontWeight: 600 }}>&larr; Back to trades</button>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-      <div><h2 style={{ margin: 0, fontSize: 22, color: "#1B2A4A", fontWeight: 700 }}>New Trade</h2><p style={{ margin: "4px 0 0", fontSize: 13, color: "#8895A7" }}>Originate a new trade escrow \u2022 {nextId}</p></div>
+      <div><h2 style={{ margin: 0, fontSize: 22, color: "#1B2A4A", fontWeight: 700 }}>New Trade</h2><p style={{ margin: "4px 0 0", fontSize: 13, color: "#8895A7" }}>Originate a new {isLC ? "LC collateral" : "trade escrow"} \u2022 {nextId}</p></div>
     </div>
     <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "flex-start" }}>
       <div style={{ flex: "1 1 400px", display: "flex", flexDirection: "column", gap: 16 }}>
+        {/* Settlement Type */}
+        <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
+          <h3 style={{ margin: "0 0 16px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Settlement Type</h3>
+          <div style={{ display: "flex", gap: 4, background: "#F4F6F9", borderRadius: 8, padding: 4 }}>
+            {[["escrow", "Direct Escrow"], ["lc", "LC Collateral"]].map(([val, label]) => (
+              <button key={val} onClick={() => set("settlementType")(val)} style={{
+                flex: 1, padding: "10px 0", border: "none", borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
+                background: form.settlementType === val ? "#fff" : "transparent", color: form.settlementType === val ? "#1B2A4A" : "#8895A7",
+                boxShadow: form.settlementType === val ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+              }}>{label}</button>
+            ))}
+          </div>
+          <div style={{ marginTop: 10, fontSize: 12, color: "#8895A7", lineHeight: 1.5 }}>
+            {isLC ? "Vault provides collateral for a bank-issued Letter of Credit. The bank handles settlement; the exporter sees a standard LC." : "Vault deploys USDC directly into a smart contract escrow. No bank intermediary. Settlement via on-chain release."}
+          </div>
+        </div>
+        {/* Counterparties */}
         <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
           <h3 style={{ margin: "0 0 16px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Counterparties</h3>
           <FormField label="Buyer (OMC / Importer)"><Input value={form.buyer} onChange={set("buyer")} placeholder="e.g. Zenith Petroleum Ltd" /></FormField>
-          <FormField label="Buyer Wallet Address" sub="EVM address for margin deposit"><Input value={form.buyerWallet} onChange={set("buyerWallet")} placeholder="0x..." /></FormField>
+          {!isLC && <FormField label="Buyer Wallet Address" sub="EVM address for margin deposit"><Input value={form.buyerWallet} onChange={set("buyerWallet")} placeholder="0x..." /></FormField>}
           <FormField label="Exporter"><Input value={form.exporter} onChange={set("exporter")} placeholder="e.g. Vitol SA" /></FormField>
-          <FormField label="Exporter Wallet Address" sub="EVM address for settlement payout"><Input value={form.exporterWallet} onChange={set("exporterWallet")} placeholder="0x..." /></FormField>
+          {!isLC && <FormField label="Exporter Wallet Address" sub="EVM address for settlement payout"><Input value={form.exporterWallet} onChange={set("exporterWallet")} placeholder="0x..." /></FormField>}
         </div>
+        {/* LC Details (only for LC type) */}
+        {isLC && (
+          <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E0F2F1", padding: 20 }}>
+            <h3 style={{ margin: "0 0 16px", fontSize: 14, color: "#00695C", fontWeight: 700 }}>Letter of Credit Details</h3>
+            <FormField label="Issuing Bank"><Input value={form.issuingBank} onChange={set("issuingBank")} placeholder="e.g. Guaranty Trust Bank" /></FormField>
+            <FormField label="Confirming Bank" sub="optional"><Input value={form.confirmingBank} onChange={set("confirmingBank")} placeholder="e.g. Standard Chartered" /></FormField>
+            <FormField label="LC Reference" sub="optional \u2014 assigned after issuance"><Input value={form.lcRef} onChange={set("lcRef")} placeholder="e.g. GTLC-2026-04412" /></FormField>
+            <div style={{ display: "flex", gap: 12 }}>
+              <div style={{ flex: 1 }}><FormField label="Bank LC Fee" sub="% of trade value"><Input value={form.bankFee} onChange={set("bankFee")} type="number" prefix="%" /></FormField></div>
+              <div style={{ flex: 1 }}><FormField label="Collateral %" sub="vault provides"><Input value={form.collateralPct} onChange={set("collateralPct")} type="number" prefix="%" /></FormField></div>
+            </div>
+          </div>
+        )}
         <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
           <h3 style={{ margin: "0 0 16px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Cargo Details</h3>
           <FormField label="Commodity"><Select value={form.commodity} onChange={set("commodity")} options={commodities} /></FormField>
@@ -208,12 +259,14 @@ function NewTradePage({ onBack, onSubmit, nextId }) {
             </div>
             <div style={{ marginTop: 16, borderTop: "1px solid #f0f0f0", paddingTop: 12 }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: "#8895A7", marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 }}>Economics</div>
-              {[["Pool yield", `${fmtFull(poolReturn)} (${yieldNum}%)`],["Platform fee", `${fmtFull(platformFeeAmt)} (${feeNum}%)`],["Buyer all-in cost", `~${buyerAllIn}%`],["Tenor", `${tenorNum} days`],["Expiry", futureStr(tenorNum)]].map(([l, v]) => (
+              {[["Pool yield", `${fmtFull(poolReturn)} (${yieldNum}%)`],
+                ...(isLC ? [["Bank LC fee", `${bankFeeNum}% (paid by buyer to bank)`],["Collateral provided", `${collateralPctNum}% by vault`]] : []),
+                ["Platform fee", `${fmtFull(platformFeeAmt)} (${feeNum}%)`],["Buyer all-in cost", `~${buyerAllIn}%`],["Tenor", `${tenorNum} days`],["Expiry", futureStr(tenorNum)]].map(([l, v]) => (
                 <div key={l} style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", fontSize: 13 }}><span style={{ color: "#8895A7" }}>{l}</span><span style={{ color: "#1B2A4A", fontWeight: 600 }}>{v}</span></div>
               ))}
             </div>
           </>)}
-          <button onClick={handleSubmit} disabled={!isValid} style={{ width: "100%", padding: 14, marginTop: 20, background: isValid ? "#1B2A4A" : "#D0D7DE", color: isValid ? "#fff" : "#8895A7", border: "none", borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: isValid ? "pointer" : "not-allowed" }}>Create Trade Escrow</button>
+          <button onClick={handleSubmit} disabled={!isValid} style={{ width: "100%", padding: 14, marginTop: 20, background: isValid ? "#1B2A4A" : "#D0D7DE", color: isValid ? "#fff" : "#8895A7", border: "none", borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: isValid ? "pointer" : "not-allowed" }}>{isLC ? "Create LC Collateral Trade" : "Create Trade Escrow"}</button>
           {!isValid && <div style={{ fontSize: 11, color: "#8895A7", textAlign: "center", marginTop: 8 }}>Fill in all required fields to create</div>}
         </div>
       </div>
@@ -222,7 +275,16 @@ function NewTradePage({ onBack, onSubmit, nextId }) {
 }
 
 function TradeDetailPage({ trade, onBack, wallet, onConnect }) {
-  const steps = [
+  const isLC = trade.settlementType === "lc";
+  const sc = settleColor[trade.settlementType] || settleColor.escrow;
+  const steps = isLC ? [
+    { label: "Trade Created", date: trade.createdAt, done: true },
+    { label: "Collateral Posted", date: trade.fundedAt, done: !!trade.fundedAt },
+    { label: "LC Issued", date: trade.fundedAt, done: !!trade.fundedAt, active: !trade.fundedAt },
+    { label: "Cargo Shipped", date: trade.shippedAt, done: !!trade.shippedAt, active: !!trade.fundedAt && !trade.shippedAt },
+    { label: "LC Settled", date: trade.releasedAt, done: !!trade.releasedAt, active: !!trade.shippedAt && !trade.releasedAt },
+    { label: "Collateral Returned", date: trade.repaymentStatus === "Completed" ? "2026-03-08" : null, done: trade.repaymentStatus === "Completed" },
+  ] : [
     { label: "Escrow Created", date: trade.createdAt, done: true },
     { label: "Fully Funded", date: trade.fundedAt, done: !!trade.fundedAt },
     { label: "Cargo Shipped", date: trade.shippedAt, done: !!trade.shippedAt, active: trade.state === "Funded" && !trade.shippedAt },
@@ -233,17 +295,43 @@ function TradeDetailPage({ trade, onBack, wallet, onConnect }) {
   return (<div>
     <button onClick={onBack} style={{ background: "none", border: "none", color: "#2E75B6", fontSize: 13, cursor: "pointer", padding: 0, marginBottom: 16, fontWeight: 600 }}>&larr; Back to trades</button>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
-      <div><div style={{ display: "flex", alignItems: "center", gap: 12 }}><h2 style={{ margin: 0, fontSize: 22, color: "#1B2A4A" }}>{trade.id}</h2><Badge state={trade.state} /></div><p style={{ margin: "4px 0 0", fontSize: 13, color: "#8895A7" }}>{trade.commodity} \u2022 {trade.volume}</p></div>
-      <div style={{ textAlign: "right" }}><div style={{ fontSize: 28, fontWeight: 700, color: "#1B2A4A" }}>{fmtFull(trade.totalAmount)}</div><div style={{ fontSize: 12, color: "#8895A7" }}>Total Escrow (USDC)</div></div>
+      <div><div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <h2 style={{ margin: 0, fontSize: 22, color: "#1B2A4A" }}>{trade.id}</h2>
+        <Badge state={trade.state} />
+        <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: 0.5, background: sc.bg, color: sc.text, border: `1px solid ${sc.border}` }}>{isLC ? "LC COLLATERAL" : "ESCROW"}</span>
+      </div><p style={{ margin: "4px 0 0", fontSize: 13, color: "#8895A7" }}>{trade.commodity} \u2022 {trade.volume}</p></div>
+      <div style={{ textAlign: "right" }}><div style={{ fontSize: 28, fontWeight: 700, color: "#1B2A4A" }}>{fmtFull(trade.totalAmount)}</div><div style={{ fontSize: 12, color: "#8895A7" }}>{isLC ? "Trade Value (USD)" : "Total Escrow (USDC)"}</div></div>
     </div>
     <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
       <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
         <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
           <h3 style={{ margin: "0 0 14px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Parties</h3>
-          {[["Buyer", trade.buyer, trade.buyerWallet],["Exporter", trade.exporter, trade.exporterWallet],["Inspector", trade.inspector, null]].map(([role, name, wallet]) => (
-            <div key={role} style={{ marginBottom: 10 }}><div style={{ fontSize: 11, color: "#8895A7", fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>{role}</div><div style={{ fontSize: 14, color: "#1B2A4A", fontWeight: 600 }}>{name}</div>{wallet && <div style={{ fontSize: 11, color: "#2E75B6", fontFamily: "monospace" }}>{wallet}</div>}</div>
+          {[["Buyer", trade.buyer, trade.buyerWallet],["Exporter", trade.exporter, trade.exporterWallet],
+            ...(isLC ? [["Issuing Bank", trade.issuingBank, null], ...(trade.confirmingBank ? [["Confirming Bank", trade.confirmingBank, null]] : [])] : []),
+            ["Inspector", trade.inspector, null]
+          ].map(([role, name, w]) => (
+            name ? <div key={role} style={{ marginBottom: 10 }}><div style={{ fontSize: 11, color: "#8895A7", fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>{role}</div><div style={{ fontSize: 14, color: "#1B2A4A", fontWeight: 600 }}>{name}</div>{w && <div style={{ fontSize: 11, color: "#2E75B6", fontFamily: "monospace" }}>{w}</div>}</div> : null
           ))}
         </div>
+        {/* LC Details card for LC trades */}
+        {isLC && (
+          <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E0F2F1", padding: 20 }}>
+            <h3 style={{ margin: "0 0 14px", fontSize: 14, color: "#00695C", fontWeight: 700 }}>Letter of Credit</h3>
+            {[
+              ["LC Reference", trade.lcRef || "Pending issuance"],
+              ["Issuing Bank", trade.issuingBank],
+              ...(trade.confirmingBank ? [["Confirming Bank", trade.confirmingBank]] : []),
+              ["Bank LC Fee", `${trade.bankFee}%`],
+              ["Collateral Provided", `${trade.collateralPct}% by vault (${fmtFull(Math.round(trade.totalAmount * trade.collateralPct / 100))})`],
+              ["Buyer Contribution", `${100 - trade.collateralPct}% (${fmtFull(Math.round(trade.totalAmount * (100 - trade.collateralPct) / 100))})`],
+            ].map(([l, v]) => (
+              <div key={l} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #f5f5f5" }}>
+                <span style={{ fontSize: 13, color: "#8895A7" }}>{l}</span>
+                <span style={{ fontSize: 13, color: "#1B2A4A", fontWeight: 600 }}>{v}</span>
+              </div>
+            ))}
+          </div>
+        )}
         <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
           <h3 style={{ margin: "0 0 14px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Funding Structure</h3>
           <FundingBar buyerMargin={trade.buyerMargin} poolCapital={trade.poolCapital} buyerDeposited={trade.state !== "Created" ? trade.buyerMargin : 0} poolDeposited={trade.state !== "Created" ? trade.poolCapital : 0} />
@@ -252,11 +340,11 @@ function TradeDetailPage({ trade, onBack, wallet, onConnect }) {
             <div style={{ flex: 1, background: "#F8FAFC", borderRadius: 8, padding: 12, minWidth: 120 }}><div style={{ fontSize: 11, color: "#8895A7", fontWeight: 600 }}>POOL CAPITAL</div><div style={{ fontSize: 18, fontWeight: 700, color: "#7B1FA2" }}>{fmtFull(trade.poolCapital)}</div><div style={{ fontSize: 11, color: "#8895A7" }}>{((trade.poolCapital/trade.totalAmount)*100).toFixed(0)}% leverage</div></div>
           </div>
         </div>
-        <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
+        {!isLC && <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
           <h3 style={{ margin: "0 0 10px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Smart Contract</h3>
           <div style={{ fontFamily: "monospace", fontSize: 13, color: "#2E75B6", wordBreak: "break-all", background: "#F8FAFC", padding: 10, borderRadius: 6, marginBottom: 10 }}>{trade.escrowAddress}</div>
           <div style={{ fontSize: 12, color: "#8895A7" }}>{trade.escrowAddress === "Pending deployment" ? "Awaiting escrow deployment" : `Deployed on Arbitrum \u2022 Expires ${trade.expiresAt}`}</div>
-        </div>
+        </div>}
         <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
           <h3 style={{ margin: "0 0 14px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Cargo Details</h3>
           {[
@@ -274,13 +362,16 @@ function TradeDetailPage({ trade, onBack, wallet, onConnect }) {
         <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #E8ECF0", padding: 20 }}>
           <h3 style={{ margin: "0 0 14px", fontSize: 14, color: "#1B2A4A", fontWeight: 700 }}>Financial Terms</h3>
           {[
-            ["Total Value", fmtFull(trade.totalAmount) + " USDC"],
+            ["Total Value", fmtFull(trade.totalAmount) + (isLC ? " USD" : " USDC")],
             ["Buyer Margin", `${((trade.buyerMargin/trade.totalAmount)*100).toFixed(0)}% (${fmtFull(trade.buyerMargin)})`],
-            ["Pool Capital", `${((trade.poolCapital/trade.totalAmount)*100).toFixed(0)}% (${fmtFull(trade.poolCapital)})`],
+            [isLC ? "Vault Collateral" : "Pool Capital", `${((trade.poolCapital/trade.totalAmount)*100).toFixed(0)}% (${fmtFull(trade.poolCapital)})`],
+            ...(isLC ? [["Bank LC Fee", `${trade.bankFee}%`]] : []),
             ["Tenor", `${trade.tenor || "\u2014"} days`],
-            ["Pool Yield Rate", trade.yieldRate ? `${trade.yieldRate}% per cycle` : "\u2014"],
+            [isLC ? "Collateral Yield" : "Pool Yield Rate", trade.yieldRate ? `${trade.yieldRate}% per cycle` : "\u2014"],
             ["Platform Fee", trade.platformFee ? `${trade.platformFee}%` : "\u2014"],
-            ["Buyer All-In Cost", trade.yieldRate && trade.platformFee ? `~${((trade.yieldRate * (100 - ((trade.buyerMargin/trade.totalAmount)*100)) / 100) + trade.platformFee).toFixed(2)}%` : "\u2014"],
+            ["Buyer All-In Cost", isLC
+              ? `~${(trade.bankFee + trade.platformFee + (trade.yieldRate * trade.collateralPct / 100)).toFixed(2)}%`
+              : (trade.yieldRate && trade.platformFee ? `~${((trade.yieldRate * (100 - ((trade.buyerMargin/trade.totalAmount)*100)) / 100) + trade.platformFee).toFixed(2)}%` : "\u2014")],
           ].map(([l, v]) => (
             <div key={l} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #f5f5f5" }}>
               <span style={{ fontSize: 13, color: "#8895A7" }}>{l}</span>
@@ -440,7 +531,7 @@ export default function App() {
     <div style={{ width: 220, background: "#1B2A4A", padding: "24px 0", display: "flex", flexDirection: "column", flexShrink: 0 }}>
       <div style={{ padding: "0 20px 24px", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
         <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", letterSpacing: -0.5, fontFamily: "'Georgia', serif" }}>Rheon.</div>
-        <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", marginTop: 2, letterSpacing: 1, textTransform: "uppercase" }}>Settlement Platform</div>
+        <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", marginTop: 2, letterSpacing: 1, textTransform: "uppercase" }}>Trade Desk</div>
       </div>
       <div style={{ marginTop: 16 }}>
         {nav.map(n => (<div key={n.id} onClick={() => { setPage(n.id); setSelectedTrade(null); setShowNewTrade(false); }} style={{ padding: "12px 20px", cursor: "pointer", display: "flex", alignItems: "center", gap: 10, background: page === n.id ? "rgba(255,255,255,0.1)" : "transparent", borderLeft: page === n.id ? "3px solid #64B5F6" : "3px solid transparent", transition: "all 0.15s" }}>
